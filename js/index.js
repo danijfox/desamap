@@ -16,7 +16,7 @@ const getData = () => {
     }),
   })
     .then((response) => response.json())
-    .then((data) => data.result.records)
+    .then((data) => console.log(data.result.records))
     .catch((err) => console.log(err));
 };
 
