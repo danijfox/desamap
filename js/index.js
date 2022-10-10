@@ -22,7 +22,6 @@ const getData = () => {
 
 const renderData = async () => {
   const desfibriladores = await getData();
-  console.log(desfibriladores);
 
   desfibriladores.forEach((desfibrilador) => {
     const {
@@ -32,5 +31,6 @@ const renderData = async () => {
       direccion_codigo_postal,
       horario_acceso,
     } = desfibrilador;
+    console.log(desfibrilador);
   });
 };
