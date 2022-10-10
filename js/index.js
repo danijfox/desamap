@@ -23,20 +23,4 @@ const getData = () => {
 const renderData = async () => {
   const desfibriladores = await getData();
   console.log(desfibriladores);
-  let html = "";
-
-  desfibriladores.forEach((desfibrilador) => {
-    const {
-      direccion_via_codigo,
-      direccion_via_nombre,
-      direccion_portal_numero,
-      direccion_codigo_postal,
-      horario_acceso,
-    } = desfibrilador;
-
-    html += `
-          <li>${horario_acceso} </li>
-          `;
-  });
-  document.getElementsByClassName("contenedor")[0].innerHTML = html;
 };
