@@ -1,12 +1,42 @@
 document.addEventListener("DOMContentLoaded", () => {
-  getDesaData();
+  renderData();
 });
 
-const getDesaData = () => {
-  const url =
-    "https://datos.comunidad.madrid/catalogo/dataset/35609dd5-9430-4d2e-8198-3eeb277e5282/resource/c38446ec-ace1-4d22-942f-5cc4979d19ed/download/desfibriladores_externos_fuera_ambito_sanitario.json";
+const getData = () => {
+  const corsAnywhere = "https://cors-anywhere.herokuapp.com/";
 
-  return fetch(url)
+  const yourUrl =
+    "https://datos.comunidad.madrid/catalogo/api/action/datastore_search?id=1dd3e628-6f06-45e5-bb7b-36d6e6e557cf&limit=8474";
+
+  return fetch(corsAnywhere + yourUrl, {
+    method: "GET",
+    headers: new Headers({
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+    }),
+  })
     .then((response) => response.json())
-    .then((result) => console.log(result.data));
+    .then((data) => data.result.records)
+    .catch((err) => console.log(err));
+};
+
+const renderData = async () => {
+  const desfibriladores = await getData();
+  console.log(desfibriladores);
+  let html = "";
+
+  desfibriladores.forEach((desfibrilador) => {
+    const {
+      direccion_via_codigo,
+      direccion_via_nombre,
+      direccion_portal_numero,
+      direccion_codigo_postal,
+      horario_acceso,
+    } = desfibrilador;
+
+    html += `
+          <li>${horario_acceso} </li>
+          `;
+  });
+  document.getElementsByClassName("contenedor")[0].innerHTML = html;
 };
