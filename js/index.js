@@ -16,12 +16,13 @@ const getData = () => {
     }),
   })
     .then((response) => response.json())
-    .then((data) => console.log(data.result.records))
+    .then((data) => data.result.records)
     .catch((err) => console.log(err));
 };
 
 const renderData = async () => {
   const desfibriladores = await getData();
+  console.log(desfibriladores);
 
   desfibriladores.forEach((desfibrilador) => {
     const {
@@ -31,6 +32,5 @@ const renderData = async () => {
       direccion_codigo_postal,
       horario_acceso,
     } = desfibrilador;
-    console.log(desfibrilador);
   });
 };
